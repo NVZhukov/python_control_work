@@ -42,3 +42,7 @@ def change_note():
             print("Некорректный ввод. Введите число")
             continue
     return answer
+
+
+def message():
+    return input("Укажите ID заметки: ")
