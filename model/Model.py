@@ -99,13 +99,26 @@ def change(path_to_file, data, param):
 
 
 def get_path():
-    print('Вот такие есть заметки:')
-    path = 'd:\\python\\control_work\\notes_application\\'
-    extension = 'csv'
-    os.chdir(path)
-    result = glob.glob('*.{}'.format(extension))
-    for names in result:
-        print(names)
-    path = input('Укажите имя файла с которым хотите работать: ')
-    str_path = f'{path}.csv'
-    return str_path
+    path_dir = 'd:\\python\\control_work\\notes\\'
+    if os.path.isdir(path_dir):
+        if not os.listdir(path_dir):
+            file_name = input('Укажите имя файла новой заметки: ')
+            new_note = path_dir + file_name + '.csv'
+            with open(new_note, 'wb') as myfile:
+                return new_note
+        else:
+            print('Вот такие есть заметки:')
+            extension = 'csv'
+            os.chdir(path_dir)
+            result = glob.glob('*.{}'.format(extension))
+            for names in result:
+                print(names)
+            file_name = input('Укажите имя файла с которым хотите работать: ')
+            path_dir = f'{file_name}.csv'
+            if (path_dir != names):
+                with open(path_dir, 'wb') as myfile:
+                    return path_dir
+    else:
+        print("Given directory doesn't exist")
+
+    return path_dir
